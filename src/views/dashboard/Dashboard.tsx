@@ -15,7 +15,7 @@ import IconButton from "@mui/material/IconButton";
 import SearchBar from "../../components/text/SearchText";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { getAllBlogs } from "../../store/blogs";
-import { selectBlogSearch } from "../../store/blogs/selectors";
+import { selectBlogItems, selectBlogSearch } from "../../store/blogs/selectors";
 import Text2 from "../../components/text/Text2";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
@@ -27,7 +27,7 @@ const Dashboard = () => {
   const dispatch = useAppDispatch();
   const searchText = useAppSelector(selectBlogSearch);
   const navigate = useNavigate();
-
+  const blogs = useAppSelector(selectBlogItems);
   const theme = useTheme();
 
   const [search, setSearch] = useState(searchText);
@@ -43,6 +43,9 @@ const Dashboard = () => {
   const handleDetail = () => {
     navigate("/sell");
   };
+  React.useEffect(() => {
+    console.log("Fetched Blogs:", blogs);
+  }, [blogs]);
 
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
